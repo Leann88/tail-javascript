@@ -1,11 +1,13 @@
 import fs from "fs";
 import readline from "readline";
 
-let stream;
 let linesToPrint = 10;
 let arr = [];
-let params = process.argv.slice(2);
-let file = params.slice(params.length - 1);
+
+
+const params = process.argv.slice(2);
+const file = params.slice(params.length - 1).toString();
+const stream = fs.createReadStream(file);;
 
 for(let i  = 0; i < params.length - 1; i++) {
     switch(params[i]) {
@@ -18,8 +20,6 @@ for(let i  = 0; i < params.length - 1; i++) {
         throw new Error(`${params[i]} not found`);
     }
 }
-
-stream = fs.createReadStream(file[0]);
 
 let rl = readline.createInterface({
     input: stream,
